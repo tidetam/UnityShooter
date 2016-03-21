@@ -15,14 +15,15 @@ namespace CompleteProject
         public float flashSpeed = 5f;                               // The speed the damageImage will fade at.
         public Color flashColour = new Color(1f, 0f, 0f, 0.1f);     // The colour the damageImage is set to, to flash.
 
-
+		int count = 0;
         Animator anim;                                              // Reference to the Animator component.
         AudioSource playerAudio;                                    // Reference to the AudioSource component.
         PlayerMovement playerMovement;                              // Reference to the player's movement.
         PlayerShooting playerShooting;                              // Reference to the PlayerShooting script.
         bool isDead;                                                // Whether the player is dead.
         bool damaged;                                               // True when the player gets damaged.
-
+		bool triggerBig = false;
+		Rigidbody playerRigidbody; 
 
         void Awake ()
         {
@@ -34,11 +35,23 @@ namespace CompleteProject
 
             // Set the initial health of the player.
             currentHealth = startingHealth;
+
+			playerRigidbody = GetComponent <Rigidbody> ();
         }
 
 
         void Update ()
         {
+			if (triggerBig) {
+				count = 100;
+				triggerBig = false;
+			}
+			count--;
+			Debug.Log (count);
+			if (count < 0) {
+				transform.localScale = new Vector3 (1, 1, 1);
+				count = 0;
+			}
             // If the player has just been damaged...
             if(damaged)
             {
@@ -109,8 +122,7 @@ namespace CompleteProject
 
 		void OnTriggerEnter(Collider other) 
 		{
-			if (other.gameObject.CompareTag ("Pick Up"))
-			{
+			if (other.gameObject.CompareTag ("healpack")) {
 				
 				other.gameObject.SetActive (false);
 				if (currentHealth <= 90) {
@@ -119,8 +131,11 @@ namespace CompleteProject
 					currentHealth = 100;
 				}
 				healthSlider.value = currentHealth;
-
-
+			} else if (other.gameObject.CompareTag ("gunpack")) {
+				other.gameObject.SetActive (false);
+				Debug.Log (playerRigidbody.tag);
+				transform.localScale = new Vector3(1.5F, 1.5F, 1.5F);
+				triggerBig = true;
 			}
 		}
 

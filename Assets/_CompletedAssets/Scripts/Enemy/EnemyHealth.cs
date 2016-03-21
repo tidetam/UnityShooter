@@ -89,8 +89,7 @@ namespace CompleteProject
             enemyAudio.Play ();
 
 			GameObject piup = (GameObject)GameObject.Instantiate(pickup, hitPoint, Quaternion.identity);
-			piup.tag = "healpack";
-			Debug.Log (piup.tag);
+			piup.tag = "gunpack";
         }
 
 
