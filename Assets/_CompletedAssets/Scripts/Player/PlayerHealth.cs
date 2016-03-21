@@ -47,7 +47,6 @@ namespace CompleteProject
 				triggerBig = false;
 			}
 			count--;
-			Debug.Log (count);
 			if (count < 0) {
 				transform.localScale = new Vector3 (1, 1, 1);
 				count = 0;

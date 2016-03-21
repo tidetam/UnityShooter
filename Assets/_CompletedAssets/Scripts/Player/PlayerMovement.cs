@@ -113,13 +113,12 @@ namespace CompleteProject
             // Tell the animator whether or not the player is walking.
             anim.SetBool ("IsWalking", walking);
         }
-//		void OnTriggerEnter(Collider other) 
-//		{
-//			Debug.Log ("trigger");
-//			if (other.gameObject.CompareTag ("Pick Up"))
-//			{
-//				other.gameObject.SetActive (false);
-//			}
-//		}
+		void OnTriggerEnter(Collider other) 
+		{
+			if (other.gameObject.CompareTag ("Pick Up"))
+			{
+				other.gameObject.SetActive (false);
+			}
+		}
     }
 }

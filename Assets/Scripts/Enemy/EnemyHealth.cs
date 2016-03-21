@@ -72,7 +72,7 @@ public class EnemyHealth : MonoBehaviour
         enemyAudio.clip = deathClip;
         enemyAudio.Play ();
 
-		GameObject.Instantiate(pickup, new Vector3(0, 0), Quaternion.identity);
+		GameObject.Instantiate(pickup, hitPoint, Quaternion.identity);
     }
 
 
