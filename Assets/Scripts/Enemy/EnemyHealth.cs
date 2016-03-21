@@ -8,6 +8,8 @@ public class EnemyHealth : MonoBehaviour
     public int scoreValue = 10;
     public AudioClip deathClip;
 
+	public GameObject pickup;
+
 
     Animator anim;
     AudioSource enemyAudio;
@@ -51,13 +53,16 @@ public class EnemyHealth : MonoBehaviour
 
         if(currentHealth <= 0)
         {
-            Death ();
+			Death (hitPoint);
         }
     }
 
 
-    void Death ()
+	void Death (Vector3 hitPoint)
     {
+//		Debug.Log (hitPoint);
+//		Debug.Log (Instantiate (pickup, hitPoint, Quaternion.identity));
+//		Instantiate (pickup, hitPoint, Quaternion.identity);
         isDead = true;
 
         capsuleCollider.isTrigger = true;
@@ -66,6 +71,8 @@ public class EnemyHealth : MonoBehaviour
 
         enemyAudio.clip = deathClip;
         enemyAudio.Play ();
+
+		GameObject.Instantiate(pickup, new Vector3(0, 0), Quaternion.identity);
     }
 
 

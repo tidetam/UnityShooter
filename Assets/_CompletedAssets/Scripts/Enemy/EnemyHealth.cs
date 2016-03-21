@@ -10,6 +10,8 @@ namespace CompleteProject
         public int scoreValue = 10;                 // The amount added to the player's score when the enemy dies.
         public AudioClip deathClip;                 // The sound to play when the enemy dies.
 
+		public GameObject pickup;
+
 
         Animator anim;                              // Reference to the animator.
         AudioSource enemyAudio;                     // Reference to the audio source.
@@ -66,12 +68,12 @@ namespace CompleteProject
             if(currentHealth <= 0)
             {
                 // ... the enemy is dead.
-                Death ();
+                Death (hitPoint);
             }
         }
 
 
-        void Death ()
+		void Death (Vector3 hitPoint)
         {
             // The enemy is dead.
             isDead = true;
@@ -85,6 +87,8 @@ namespace CompleteProject
             // Change the audio clip of the audio source to the death clip and play it (this will stop the hurt clip playing).
             enemyAudio.clip = deathClip;
             enemyAudio.Play ();
+
+			GameObject.Instantiate(pickup, hitPoint, Quaternion.identity);
         }
 
 

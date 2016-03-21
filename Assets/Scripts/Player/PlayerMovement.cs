@@ -57,4 +57,18 @@ public class PlayerMovement : MonoBehaviour
 		bool walking = h != 0f || v != 0f;
 		anim.SetBool ("IsWalking", walking);
 	}
+
+	void OnTriggerEnter(Collider other) {
+		Debug.Log ("ss");
+		//		Destroy(other.gameObject);
+		if (other.gameObject.CompareTag ("Pick Up"))
+		{
+			
+			Destroy(other.gameObject);
+			//other.gameObject.SetActive (false);
+//			count += 1;
+//			SetCountText ();
+		}
+	}
+
 }

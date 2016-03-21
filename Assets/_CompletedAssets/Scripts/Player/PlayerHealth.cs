@@ -106,5 +106,23 @@ namespace CompleteProject
             // Reload the level that is currently loaded.
             SceneManager.LoadScene (0);
         }
+
+		void OnTriggerEnter(Collider other) 
+		{
+			if (other.gameObject.CompareTag ("Pick Up"))
+			{
+				
+				other.gameObject.SetActive (false);
+				if (currentHealth <= 90) {
+					currentHealth += 10;
+				} else {
+					currentHealth = 100;
+				}
+				healthSlider.value = currentHealth;
+
+
+			}
+		}
+
     }
 }

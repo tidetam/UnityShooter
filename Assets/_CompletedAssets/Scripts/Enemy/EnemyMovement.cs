@@ -34,6 +34,7 @@ namespace CompleteProject
             {
                 // ... disable the nav mesh agent.
                 nav.enabled = false;
+
             }
         }
     }
