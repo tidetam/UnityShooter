@@ -88,7 +88,9 @@ namespace CompleteProject
             enemyAudio.clip = deathClip;
             enemyAudio.Play ();
 
-			GameObject.Instantiate(pickup, hitPoint, Quaternion.identity);
+			GameObject piup = (GameObject)GameObject.Instantiate(pickup, hitPoint, Quaternion.identity);
+			piup.tag = "healpack";
+			Debug.Log (piup.tag);
         }
 
 
