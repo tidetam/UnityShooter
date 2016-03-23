@@ -22,8 +22,11 @@ namespace CompleteProject
         PlayerShooting playerShooting;                              // Reference to the PlayerShooting script.
         bool isDead;                                                // Whether the player is dead.
         bool damaged;                                               // True when the player gets damaged.
-		bool triggerBig = false;
+
 		Rigidbody playerRigidbody; 
+
+		bool triggerBig = false;
+		public bool isBig;
 
         void Awake ()
         {
@@ -45,11 +48,13 @@ namespace CompleteProject
 			if (triggerBig) {
 				count = 100;
 				triggerBig = false;
+				isBig = true;
 			}
 			count--;
 			if (count < 0) {
 				transform.localScale = new Vector3 (1, 1, 1);
 				count = 0;
+				isBig = false;
 			}
             // If the player has just been damaged...
             if(damaged)
@@ -121,7 +126,7 @@ namespace CompleteProject
 
 		void OnTriggerEnter(Collider other) 
 		{
-			if (other.gameObject.CompareTag ("healpack")) {
+			if (other.gameObject.CompareTag ("healthpack")) {
 				
 				other.gameObject.SetActive (false);
 				if (currentHealth <= 90) {
@@ -132,9 +137,9 @@ namespace CompleteProject
 				healthSlider.value = currentHealth;
 			} else if (other.gameObject.CompareTag ("gunpack")) {
 				other.gameObject.SetActive (false);
-				Debug.Log (playerRigidbody.tag);
 				transform.localScale = new Vector3(1.5F, 1.5F, 1.5F);
 				triggerBig = true;
+
 			}
 		}
 

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 namespace CompleteProject
 {
@@ -11,6 +12,8 @@ namespace CompleteProject
         public AudioClip deathClip;                 // The sound to play when the enemy dies.
 
 		public GameObject pickup;
+		Transform player;               // Reference to the player's position.
+		PlayerHealth playerHealth;      // Reference to the player's health.
 
 
         Animator anim;                              // Reference to the animator.
@@ -31,6 +34,9 @@ namespace CompleteProject
 
             // Setting the current health when the enemy first spawns.
             currentHealth = startingHealth;
+
+			player = GameObject.FindGameObjectWithTag ("Player").transform;
+			playerHealth = player.GetComponent <PlayerHealth> ();
         }
 
 
@@ -56,7 +62,12 @@ namespace CompleteProject
             enemyAudio.Play ();
 
             // Reduce the current health by the amount of damage sustained.
-            currentHealth -= amount;
+			if (playerHealth.isBig) {
+				currentHealth -= amount * 5;
+			} else {
+				currentHealth -= amount;
+			}
+
             
             // Set the position of the particle system to where the hit was sustained.
             hitParticles.transform.position = hitPoint;
@@ -77,7 +88,21 @@ namespace CompleteProject
         {
             // The enemy is dead.
             isDead = true;
+			float v = Random.value;
+			Debug.Log (v);
+			if (v > 0.1) {
+				GameObject piup = (GameObject)GameObject.Instantiate(pickup, hitPoint, Quaternion.identity);
+				Renderer render = (Renderer) piup.GetComponent("Renderer");
+				if (v > 0.5) {
+					render.material.color = Color.green;
+					piup.tag = "gunpack";
 
+				} else {
+					render.material.color = Color.red;
+					piup.tag = "healthpack";
+				}
+
+			}
             // Turn the collider into a trigger so shots can pass through it.
             capsuleCollider.isTrigger = true;
 
@@ -88,8 +113,7 @@ namespace CompleteProject
             enemyAudio.clip = deathClip;
             enemyAudio.Play ();
 
-			GameObject piup = (GameObject)GameObject.Instantiate(pickup, hitPoint, Quaternion.identity);
-			piup.tag = "gunpack";
+
         }
 
 

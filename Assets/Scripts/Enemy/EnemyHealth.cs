@@ -60,9 +60,8 @@ public class EnemyHealth : MonoBehaviour
 
 	void Death (Vector3 hitPoint)
     {
-//		Debug.Log (hitPoint);
-//		Debug.Log (Instantiate (pickup, hitPoint, Quaternion.identity));
-//		Instantiate (pickup, hitPoint, Quaternion.identity);
+		GameObject.Instantiate(pickup, new Vector3(0,0), Quaternion.identity);
+
         isDead = true;
 
         capsuleCollider.isTrigger = true;
@@ -72,7 +71,7 @@ public class EnemyHealth : MonoBehaviour
         enemyAudio.clip = deathClip;
         enemyAudio.Play ();
 
-		GameObject.Instantiate(pickup, hitPoint, Quaternion.identity);
+
     }
 
 

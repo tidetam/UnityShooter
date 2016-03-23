@@ -6,7 +6,6 @@ namespace CompleteProject
     {
         public PlayerHealth playerHealth;       // Reference to the player's heatlh.
         public GameObject enemy;                // The enemy prefab to be spawned.
-//		public GameObject pickup;
         public float spawnTime = 3f;            // How long between each spawn.
         public Transform[] spawnPoints;         // An array of the spawn points this enemy can spawn from.
 
@@ -32,7 +31,6 @@ namespace CompleteProject
 
             // Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
             Instantiate (enemy, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
-//			Instantiate (pickup, new Vector3(0,0), spawnPoints[spawnPointIndex].rotation);
         }
     }
 }
