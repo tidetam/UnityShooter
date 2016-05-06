@@ -30,6 +30,7 @@ public class GameOverManager : MonoBehaviour
 			{
 				// .. then reload the currently loaded level.
 				Application.LoadLevel(Application.loadedLevel);
+
 			}
 		}
     }

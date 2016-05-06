@@ -49,13 +49,26 @@ namespace CompleteProject
 				count = 100;
 				triggerBig = false;
 				isBig = true;
+
 			}
 			count--;
 			if (count < 0) {
-				transform.localScale = new Vector3 (1, 1, 1);
 				count = 0;
 				isBig = false;
 			}
+
+			if (isBig) {
+				if (transform.localScale.x < 2.0f) {
+					transform.localScale = Vector3.Lerp (transform.localScale, new Vector3 (2.0F, 2.0F, 2.0F), Time.deltaTime * 5f);
+				} 
+
+			} else {
+				if (transform.localScale.x > 1.0f) {
+					transform.localScale = Vector3.Lerp (transform.localScale, new Vector3 (1.0F, 1.0F, 1.0F), Time.deltaTime * 5f);
+				}
+			}
+
+
             // If the player has just been damaged...
             if(damaged)
             {
@@ -107,6 +120,7 @@ namespace CompleteProject
 
             // Tell the animator that the player is dead.
             anim.SetTrigger ("Die");
+			ScoreBoardManager.AddScore (ScoreManager.score);
 
             // Set the audiosource to play the death clip and play it (this will stop the hurt sound from playing).
             playerAudio.clip = deathClip;
@@ -121,6 +135,7 @@ namespace CompleteProject
         public void RestartLevel ()
         {
             // Reload the level that is currently loaded.
+
             SceneManager.LoadScene (0);
         }
 
@@ -137,7 +152,9 @@ namespace CompleteProject
 				healthSlider.value = currentHealth;
 			} else if (other.gameObject.CompareTag ("gunpack")) {
 				other.gameObject.SetActive (false);
-				transform.localScale = new Vector3(1.5F, 1.5F, 1.5F);
+//				transform.localScale = new Vector3(1.5F, 1.5F, 1.5F);
+//				transform.localScale = Vector3.Lerp (transform.localScale, new Vector3 (2.0F, 2.0F, 2.0F), 5f);
+
 				triggerBig = true;
 
 			}

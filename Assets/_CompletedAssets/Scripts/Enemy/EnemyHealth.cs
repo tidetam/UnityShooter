@@ -89,11 +89,10 @@ namespace CompleteProject
             // The enemy is dead.
             isDead = true;
 			float v = Random.value;
-			Debug.Log (v);
-			if (v > 0.1) {
+			if (v > 0.8) {
 				GameObject piup = (GameObject)GameObject.Instantiate(pickup, hitPoint, Quaternion.identity);
 				Renderer render = (Renderer) piup.GetComponent("Renderer");
-				if (v > 0.5) {
+				if (v > 0.9) {
 					render.material.color = Color.green;
 					piup.tag = "gunpack";
 

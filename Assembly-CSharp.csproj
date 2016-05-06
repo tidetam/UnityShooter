@@ -76,6 +76,7 @@
      <Compile Include="Assets\_CompletedAssets\Scripts\Managers\EnemyManager.cs" />
      <Compile Include="Assets\_CompletedAssets\Scripts\Managers\GameOverManager.cs" />
      <Compile Include="Assets\_CompletedAssets\Scripts\Managers\PauseManager.cs" />
+     <Compile Include="Assets\_CompletedAssets\Scripts\Managers\ScoreBoardManager.cs" />
      <Compile Include="Assets\_CompletedAssets\Scripts\Managers\ScoreManager.cs" />
      <Compile Include="Assets\_CompletedAssets\Scripts\Player\PlayerHealth.cs" />
      <Compile Include="Assets\_CompletedAssets\Scripts\Player\PlayerMovement.cs" />
